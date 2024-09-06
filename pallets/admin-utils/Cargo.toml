@@ -1,0 +1,80 @@
+[package]
+name = "pallet-admin-utils"
+version = "4.0.0-dev"
+description = "FRAME pallet for extending admin utilities."
+authors = ["Cloud3 Team"]
+homepage = "https://cloud3.foundation"
+edition = "2021"
+license = "Unlicense"
+publish = false
+repository = "https://github.com/cloud3-foudation"
+
+[lints]
+workspace = true
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+cloud3-macros.workspace = true
+codec = { package = "parity-scale-codec", version = "3.0.0", default-features = false, features = [
+	"derive",
+] }
+scale-info = { workspace = true, features = ["derive"] }
+frame-benchmarking = { workspace = true, optional = true }
+frame-support = { workspace = true }
+frame-system = { workspace = true }
+sp-runtime = { workspace = true }
+log = { workspace = true }
+pallet-cloud3 = { version = "4.0.0-dev", default-features = false, path = "../cloud3" }
+sp-weights = { workspace = true }
+substrate-fixed = { workspace = true }
+
+
+[dev-dependencies]
+sp-core = { workspace = true }
+sp-io = { workspace = true }
+sp-tracing = { workspace = true }
+sp-consensus-aura = { workspace = true }
+pallet-balances = { workspace = true, features = ["std"] }
+pallet-scheduler = { workspace = true }
+sp-std = { workspace = true }
+
+[features]
+default = ["std"]
+std = [
+	"codec/std",
+	"frame-benchmarking?/std",
+	"frame-support/std",
+	"frame-system/std",
+	"scale-info/std",
+	"pallet-cloud3/std",
+	"sp-consensus-aura/std",
+	"pallet-balances/std",
+	"pallet-scheduler/std",
+	"sp-runtime/std",
+	"sp-tracing/std",
+	"sp-weights/std",
+	"log/std",
+	"sp-core/std",
+	"sp-io/std",
+	"sp-std/std",
+	"substrate-fixed/std",
+]
+runtime-benchmarks = [
+	"frame-benchmarking/runtime-benchmarks",
+	"frame-support/runtime-benchmarks",
+	"frame-system/runtime-benchmarks",
+	"pallet-balances/runtime-benchmarks",
+	"sp-runtime/runtime-benchmarks",
+	"pallet-cloud3/runtime-benchmarks",
+	"pallet-scheduler/runtime-benchmarks",
+]
+try-runtime = [
+	"frame-support/try-runtime",
+	"frame-system/try-runtime",
+	"pallet-balances/try-runtime",
+	"pallet-scheduler/try-runtime",
+	"sp-runtime/try-runtime",
+	"pallet-cloud3/try-runtime"
+]
