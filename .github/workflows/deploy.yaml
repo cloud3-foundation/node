@@ -1,0 +1,22 @@
+name: Deploy Node
+
+# Runs after the Docker image has been built and published.
+# Triggered by the "Docker released" workflow completing on a tag.
+on:
+  workflow_run:
+    workflows: ["Docker released"]
+    types:
+      - completed
+jobs:
+  docker-build-released:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - linux/amd64
+          - linux/arm/v7
+          - linux/arm64
