@@ -55,7 +55,6 @@ jobs:
         with:
           context: .
           provenance: false
-          target: final
           platforms: ${{ matrix.platform }}
           outputs: type=image,name=${{ env.REGISTRY_IMAGE }},push-by-digest=true,name-canonical=true,push=true
 
@@ -67,7 +66,6 @@ jobs:
           context: .
           provenance: false
           platforms: ${{ matrix.platform }}
-          target: final
           labels: ${{ steps.meta.outputs.labels }}
           outputs: type=image,name=${{ env.REGISTRY_IMAGE }},push-by-digest=true,name-canonical=true,push=true
 
