@@ -20,8 +20,23 @@ jobs:
       startsWith(github.event.workflow_run.head_branch, 'v')
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    outputs:
+      tag: ${{ steps.read-tag.outputs.tag }}
 
     steps:
+      - name: Download release tag artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: release-tag
+          path: /tmp/release
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Read release tag
+        id: read-tag
+        run: |
+          TAG=$(cat /tmp/release/tag.txt)
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
       - name: Deploy to node1
         uses: appleboy/ssh-action@v1
         with:
@@ -32,7 +47,7 @@ jobs:
           script: |
             set -euo pipefail
             cd /opt/voiceban
-            NODE_IMAGE="ghcr.io/cloud3-foundation/node:${{ github.event.workflow_run.head_branch }}" \
+            NODE_IMAGE="ghcr.io/cloud3-foundation/node:${{ steps.read-tag.outputs.tag }}" \
               bash /opt/cloud/scripts/node/update.sh
 
       - name: Record failure
