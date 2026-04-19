@@ -1,6 +1,6 @@
 # Cloud3 Node
 
-Clou3 is a committed to providing easy-to-use blockchain infrastructure and creating a one-stop comprehensive infrastructure platform, which aims to reduce the threshold and cost for developers, while bringing them great returns.
+Clou3 is a committed to providing easy-to-use blockchain infrastructure and creating a one-stop comprehensive infrastructure platform, which aims to reduce the threshold and cost for developers, while bringing them great returns.!
 
 ## Getting Started
 
